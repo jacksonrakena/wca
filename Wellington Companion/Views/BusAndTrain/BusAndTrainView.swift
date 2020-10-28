@@ -17,14 +17,25 @@ struct BusAndTrainView: View {
                 if (apiManager.quickStopLoadError != "") {
                     Text(apiManager.quickStopLoadError).padding()
                 }
-                else if (apiManager.stops.count == 0) {
-                    Text("Loading stops...")
-                } else {
+                else {
                     List {
                         ForEach(apiManager.stops) { (stopinfo) in
                             StopNavigationLink(stop: stopinfo)
+                        }.onDelete { index in
+                            let stops = try! PersistenceController.shared.container.viewContext.fetch(SavedStop.fetchRequest()) as [SavedStop]
+                            for i in index {
+                                let stop = apiManager.stops[i]
+                                let toDelete = stops.first {
+                                    stop.stopId == $0.stopId
+                                }
+                                if toDelete != nil {
+                                    apiManager.stops.remove(at: i)
+                                    PersistenceController.shared.container.viewContext.delete(toDelete!)
+                                    try! PersistenceController.shared.container.viewContext.save()
+                                }
+                            }
                         }
-                        NavigationLink(destination: AddStopView()) {
+                        NavigationLink(destination: AddStopView().environmentObject(apiManager)) {
                             Text("Add a stop").foregroundColor(.blue)
                         }
                     }

@@ -24,8 +24,16 @@ class ApiManager: ObservableObject {
         isLoadingQuickStopView = true
         quickStopLoadError = ""
         self.stops = []
-        
-        var ids = ["7042", "7124", "5006", "5516", "4332", "WELL", "WAIK"]
+        var ids = [String]()
+        do {
+            var fetchedIds = try PersistenceController.shared.container.viewContext.fetch(SavedStop.fetchRequest()) as [SavedStop]
+            ids = fetchedIds.map { stop in
+                return stop.stopId!
+            }
+        } catch {
+            print("Error fetching saved stops")
+            ids = ["7042", "7124", "5006", "5516", "4332", "WELL", "WAIK"]
+        }
         for id in ids {
             ApiManager.requestStopInfo(for: id) { (info, resp, err) in
                 DispatchQueue.main.async {
