@@ -13,9 +13,7 @@ struct StopNotice: Identifiable {
     public var notice: String
     
     init(raw: MetlinkStopNoticeObject) {
-        if (raw.RecordedAtTime != nil) {
-            self.timeRecorded = Constants.metlinkDateFormatter.date(from: raw.RecordedAtTime)
-        }
+        self.timeRecorded = Constants.metlinkDateFormatter.date(from: raw.RecordedAtTime)
         self.notice = raw.LineNote
     }
 }

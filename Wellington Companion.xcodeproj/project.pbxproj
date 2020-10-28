@@ -16,6 +16,11 @@
 		25067F6525494B1100986EF0 /* RawModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F6425494B1100986EF0 /* RawModels.swift */; };
 		25067F6925494B2500986EF0 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F6825494B2500986EF0 /* Models.swift */; };
 		25067F6C25494B6800986EF0 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F6B25494B6800986EF0 /* ApiManager.swift */; };
+		25067F772549513D00986EF0 /* StopNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F762549513D00986EF0 /* StopNavigationLink.swift */; };
+		25067F7B2549515000986EF0 /* DetailedStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F7A2549515000986EF0 /* DetailedStopView.swift */; };
+		25067F7E2549516300986EF0 /* DetailedServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F7D2549516300986EF0 /* DetailedServiceView.swift */; };
+		25067F812549517800986EF0 /* StopMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F802549517800986EF0 /* StopMapView.swift */; };
+		25067F84254951C200986EF0 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F83254951C200986EF0 /* Utils.swift */; };
 		256AAE9D254932780061143B /* AbyssalKit in Frameworks */ = {isa = PBXBuildFile; productRef = 256AAE9C254932780061143B /* AbyssalKit */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +37,11 @@
 		25067F6825494B2500986EF0 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		25067F6B25494B6800986EF0 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		25067F6F25494C8A00986EF0 /* Wellington Companion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Wellington Companion.entitlements"; sourceTree = "<group>"; };
+		25067F762549513D00986EF0 /* StopNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopNavigationLink.swift; sourceTree = "<group>"; };
+		25067F7A2549515000986EF0 /* DetailedStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedStopView.swift; sourceTree = "<group>"; };
+		25067F7D2549516300986EF0 /* DetailedServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedServiceView.swift; sourceTree = "<group>"; };
+		25067F802549517800986EF0 /* StopMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopMapView.swift; sourceTree = "<group>"; };
+		25067F83254951C200986EF0 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,15 +75,16 @@
 		25020CA02546CBB900FB2BA4 /* Wellington Companion */ = {
 			isa = PBXGroup;
 			children = (
+				25067F752549511400986EF0 /* Views */,
 				25067F6F25494C8A00986EF0 /* Wellington Companion.entitlements */,
 				25067F6325494B0300986EF0 /* Api */,
 				25020CA12546CBB900FB2BA4 /* Wellington_CompanionApp.swift */,
-				25020CA32546CBB900FB2BA4 /* ContentView.swift */,
 				25020CA52546CBBC00FB2BA4 /* Assets.xcassets */,
 				25020CAA2546CBBC00FB2BA4 /* Persistence.swift */,
 				25020CAF2546CBBC00FB2BA4 /* Info.plist */,
 				25020CAC2546CBBC00FB2BA4 /* Wellington_Companion.xcdatamodeld */,
 				25020CA72546CBBC00FB2BA4 /* Preview Content */,
+				25067F83254951C200986EF0 /* Utils.swift */,
 			);
 			path = "Wellington Companion";
 			sourceTree = "<group>";
@@ -94,6 +105,18 @@
 				25067F6B25494B6800986EF0 /* ApiManager.swift */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		25067F752549511400986EF0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				25020CA32546CBB900FB2BA4 /* ContentView.swift */,
+				25067F762549513D00986EF0 /* StopNavigationLink.swift */,
+				25067F7A2549515000986EF0 /* DetailedStopView.swift */,
+				25067F7D2549516300986EF0 /* DetailedServiceView.swift */,
+				25067F802549517800986EF0 /* StopMapView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,13 +194,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25067F7E2549516300986EF0 /* DetailedServiceView.swift in Sources */,
 				25020CAB2546CBBC00FB2BA4 /* Persistence.swift in Sources */,
+				25067F812549517800986EF0 /* StopMapView.swift in Sources */,
 				25020CAE2546CBBC00FB2BA4 /* Wellington_Companion.xcdatamodeld in Sources */,
 				25020CA42546CBB900FB2BA4 /* ContentView.swift in Sources */,
 				25067F6C25494B6800986EF0 /* ApiManager.swift in Sources */,
 				25067F6925494B2500986EF0 /* Models.swift in Sources */,
 				25020CA22546CBB900FB2BA4 /* Wellington_CompanionApp.swift in Sources */,
 				25067F6525494B1100986EF0 /* RawModels.swift in Sources */,
+				25067F7B2549515000986EF0 /* DetailedStopView.swift in Sources */,
+				25067F772549513D00986EF0 /* StopNavigationLink.swift in Sources */,
+				25067F84254951C200986EF0 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

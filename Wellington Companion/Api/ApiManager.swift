@@ -32,7 +32,7 @@ class ApiManager: ObservableObject {
                     if (err != nil) {
                         print(err.debugDescription)
                         self.isLoadingQuickStopView = false
-                        self.quickStopLoadError = err!.localizedDescription
+                        self.quickStopLoadError = "There was an error fetching a stop. Try again later?"
                     } else {
                         self.isLoadingQuickStopView = false
                         self.stops.append(info!)
