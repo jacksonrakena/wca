@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,10 @@
 		25020CA92546CBBC00FB2BA4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25020CA82546CBBC00FB2BA4 /* Preview Assets.xcassets */; };
 		25020CAB2546CBBC00FB2BA4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25020CAA2546CBBC00FB2BA4 /* Persistence.swift */; };
 		25020CAE2546CBBC00FB2BA4 /* Wellington_Companion.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 25020CAC2546CBBC00FB2BA4 /* Wellington_Companion.xcdatamodeld */; };
+		25067F6525494B1100986EF0 /* RawModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F6425494B1100986EF0 /* RawModels.swift */; };
+		25067F6925494B2500986EF0 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F6825494B2500986EF0 /* Models.swift */; };
+		25067F6C25494B6800986EF0 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F6B25494B6800986EF0 /* ApiManager.swift */; };
+		256AAE9D254932780061143B /* AbyssalKit in Frameworks */ = {isa = PBXBuildFile; productRef = 256AAE9C254932780061143B /* AbyssalKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		25020CAA2546CBBC00FB2BA4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		25020CAD2546CBBC00FB2BA4 /* Wellington_Companion.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wellington_Companion.xcdatamodel; sourceTree = "<group>"; };
 		25020CAF2546CBBC00FB2BA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25067F6425494B1100986EF0 /* RawModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawModels.swift; sourceTree = "<group>"; };
+		25067F6825494B2500986EF0 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		25067F6B25494B6800986EF0 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		25067F6F25494C8A00986EF0 /* Wellington Companion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Wellington Companion.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				256AAE9D254932780061143B /* AbyssalKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +65,8 @@
 		25020CA02546CBB900FB2BA4 /* Wellington Companion */ = {
 			isa = PBXGroup;
 			children = (
+				25067F6F25494C8A00986EF0 /* Wellington Companion.entitlements */,
+				25067F6325494B0300986EF0 /* Api */,
 				25020CA12546CBB900FB2BA4 /* Wellington_CompanionApp.swift */,
 				25020CA32546CBB900FB2BA4 /* ContentView.swift */,
 				25020CA52546CBBC00FB2BA4 /* Assets.xcassets */,
@@ -75,6 +86,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		25067F6325494B0300986EF0 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				25067F6425494B1100986EF0 /* RawModels.swift */,
+				25067F6825494B2500986EF0 /* Models.swift */,
+				25067F6B25494B6800986EF0 /* ApiManager.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -91,6 +112,9 @@
 			dependencies = (
 			);
 			name = "Wellington Companion";
+			packageProductDependencies = (
+				256AAE9C254932780061143B /* AbyssalKit */,
+			);
 			productName = "Wellington Companion";
 			productReference = 25020C9E2546CBB900FB2BA4 /* Wellington Companion.app */;
 			productType = "com.apple.product-type.application";
@@ -118,6 +142,9 @@
 				Base,
 			);
 			mainGroup = 25020C952546CBB900FB2BA4;
+			packageReferences = (
+				256AAE9B254932780061143B /* XCRemoteSwiftPackageReference "AbyssalKit" */,
+			);
 			productRefGroup = 25020C9F2546CBB900FB2BA4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -147,7 +174,10 @@
 				25020CAB2546CBBC00FB2BA4 /* Persistence.swift in Sources */,
 				25020CAE2546CBBC00FB2BA4 /* Wellington_Companion.xcdatamodeld in Sources */,
 				25020CA42546CBB900FB2BA4 /* ContentView.swift in Sources */,
+				25067F6C25494B6800986EF0 /* ApiManager.swift in Sources */,
+				25067F6925494B2500986EF0 /* Models.swift in Sources */,
 				25020CA22546CBB900FB2BA4 /* Wellington_CompanionApp.swift in Sources */,
+				25067F6525494B1100986EF0 /* RawModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +305,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Wellington Companion/Wellington Companion.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Wellington Companion/Preview Content\"";
 				DEVELOPMENT_TEAM = LRZRFZU4FM;
@@ -287,6 +319,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jacksonrakena.Wellington-Companion";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -297,6 +330,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Wellington Companion/Wellington Companion.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Wellington Companion/Preview Content\"";
 				DEVELOPMENT_TEAM = LRZRFZU4FM;
@@ -309,6 +344,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jacksonrakena.Wellington-Companion";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -336,6 +372,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		256AAE9B254932780061143B /* XCRemoteSwiftPackageReference "AbyssalKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/abyssal/AbyssalKit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		256AAE9C254932780061143B /* AbyssalKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 256AAE9B254932780061143B /* XCRemoteSwiftPackageReference "AbyssalKit" */;
+			productName = AbyssalKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		25020CAC2546CBBC00FB2BA4 /* Wellington_Companion.xcdatamodeld */ = {

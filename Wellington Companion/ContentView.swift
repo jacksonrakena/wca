@@ -6,75 +6,165 @@
 //
 
 import SwiftUI
+import MapKit
 import CoreData
+import AbyssalKit
 
-struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+class Utils {
+    static func getServiceTime(for service: StopService) -> String {
+        if (service.departureTimeMinutes == 0) {
+            return "due"
+        } else if (service.departureTimeMinutes! > 60) {
+            return service.departureTime!.asTimeString()
+        }
+        return String(service.departureTimeMinutes!) + "min"
+    }
+}
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+struct NextArrivalSneakView: View {
+    var color: Color
+    var service: StopService
+    
     var body: some View {
-        List {
-            ForEach(items) { item in
-                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-            }
-            .onDelete(perform: deleteItems)
-        }
-        .toolbar {
-            #if os(iOS)
-            EditButton()
-            #endif
-
-            Button(action: addItem) {
-                Label("Add Item", systemImage: "plus")
-            }
+        HStack(alignment: VerticalAlignment.center) {
+            Text(service.route)
+                .font(.system(size: 12))
+                .padding(3)
+                .background(RoundedRectangle(cornerRadius: 25).fill(color), alignment: .center)
+            Text(service.destinationStopName + " - " + Utils.getServiceTime(for: service)).font(.system(size: 14))
         }
     }
+}
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+struct StopMapView: UIViewRepresentable {
+    class StopMapPosition: NSObject, MKAnnotation {
+        let title: String?
+        let coordinate: CLLocationCoordinate2D
+        
+        init (stop: StopInfo) {
+            self.title = stop.stopName
+            self.coordinate = CLLocationCoordinate2D(latitude: stop.latitude!, longitude: stop.longitude!)
         }
     }
+    
+    var stop: StopInfo
+    
+    func makeUIView(context: Context) -> MKMapView {
+        let map = MKMapView()
+        map.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: stop.latitude!, longitude: stop.longitude!), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        map.addAnnotation(StopMapPosition(stop: stop))
+        return map
+    }
+    
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+       
+    }
+}
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+struct ServiceDetailView: View {
+    var service: StopService
+    var body: some View {
+        Text(service.route)
+    }
+}
 
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+struct StopDetailView: View {
+    var stop: StopInfo
+    
+    var body: some View {
+        VStack {
+            StopMapView(stop: stop).padding()
+            
+            Text("Notices").font(.largeTitle)
+            List {
+                ForEach(stop.notices) { (notice) in
+                    NavigationLink(destination: Text(notice.notice)) {
+                        HStack {
+                            Text(notice.notice).truncationMode(.tail)
+                            Spacer()
+                            Text(notice.timeRecorded!.string(inFormat: "MMM d"))
+                        }
+                    }
+                }
+            }
+            
+            Text("Upcoming services").font(.largeTitle)
+            List {
+                ForEach(stop.upcomingServices) { (service) in
+                    VStack {
+                        NavigationLink(destination: ServiceDetailView(service: service)) {
+                            HStack {
+                                Text(service.route + " - " + service.destinationStopName)
+                                Spacer()
+                                Text(Utils.getServiceTime(for: service))
+                            }
+                        }
+                    }
+                }
+            }
+        }.navigationBarTitle(stop.stopName)
+    }
+}
+
+struct StopSneakView: View {
+    var stop: StopInfo
+    
+    var body: some View {
+        NavigationLink(destination: StopDetailView(stop: stop)) {
+            VStack(alignment: .leading, spacing: nil) {
+                Text(stop.stopName)
+                HStack(alignment: .center, spacing: 0) {
+                    if stop.upcomingServices.count > 1 {
+                        NextArrivalSneakView(color: .yellow, service: stop.upcomingServices[0]).frame(minWidth: 0, maxWidth: .infinity)
+                        
+                        NextArrivalSneakView(color: .yellow, service: stop.upcomingServices[1]).frame(minWidth: 0, maxWidth: .infinity)
+                        
+                        Spacer()
+                    } else if stop.upcomingServices.count == 1 {
+                        NextArrivalSneakView(color: .yellow, service: stop.upcomingServices[0]).frame(minWidth: 0, maxWidth: .infinity)
+                    }
+                }
             }
         }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+
+class Constants {
+    static var metlinkDateFormatter: DateFormatter {
+        get {
+            let format = DateFormatter()
+            format.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            return format
+        }
+    }
+}
+
+struct ContentView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var apiManager = ApiManager()
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                if (apiManager.quickStopLoadError != "") {
+                    Text(apiManager.quickStopLoadError)
+                }
+                else if (apiManager.stops.count == 0) {
+                    Text("Loading stops...")
+                } else {
+                    List {
+                        ForEach(apiManager.stops) { (stopinfo) in
+                            StopSneakView(stop: stopinfo)
+                        }
+                    }
+                }
+                Text("This app uses information from Metlink.").font(.footnote)
+                Text("Copyright (c) 2020 Jackson Rakena").font(.footnote)
+            }.navigationBarTitle("Your favourite stops").navigationBarItems(trailing: Button("Refresh") {
+                self.apiManager.updateQuickStopView()
+            })
+        }
     }
 }
