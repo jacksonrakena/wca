@@ -25,7 +25,7 @@ class ApiManager: ObservableObject {
         quickStopLoadError = ""
         self.stops = []
         
-        var ids = ["7042", "7124", "5006", "5516", "4332"]
+        var ids = ["7042", "7124", "5006", "5516", "4332", "WELL", "WAIK"]
         for id in ids {
             ApiManager.requestStopInfo(for: id) { (info, resp, err) in
                 DispatchQueue.main.async {

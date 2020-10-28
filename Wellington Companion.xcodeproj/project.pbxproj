@@ -21,7 +21,10 @@
 		25067F7E2549516300986EF0 /* DetailedServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F7D2549516300986EF0 /* DetailedServiceView.swift */; };
 		25067F812549517800986EF0 /* StopMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F802549517800986EF0 /* StopMapView.swift */; };
 		25067F84254951C200986EF0 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F83254951C200986EF0 /* Utils.swift */; };
+		25067F872549525300986EF0 /* AddStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F862549525300986EF0 /* AddStopView.swift */; };
 		256AAE9D254932780061143B /* AbyssalKit in Frameworks */ = {isa = PBXBuildFile; productRef = 256AAE9C254932780061143B /* AbyssalKit */; };
+		25DF225C254954E3007434AF /* BusAndTrainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF225B254954E3007434AF /* BusAndTrainView.swift */; };
+		25DF226125495A42007434AF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF226025495A42007434AF /* AboutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		25067F7D2549516300986EF0 /* DetailedServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedServiceView.swift; sourceTree = "<group>"; };
 		25067F802549517800986EF0 /* StopMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopMapView.swift; sourceTree = "<group>"; };
 		25067F83254951C200986EF0 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		25067F862549525300986EF0 /* AddStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStopView.swift; sourceTree = "<group>"; };
+		25DF225B254954E3007434AF /* BusAndTrainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusAndTrainView.swift; sourceTree = "<group>"; };
+		25DF226025495A42007434AF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,13 +116,32 @@
 		25067F752549511400986EF0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				25DF225F25495A3B007434AF /* About */,
+				25DF225E25495A32007434AF /* BusAndTrain */,
 				25020CA32546CBB900FB2BA4 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		25DF225E25495A32007434AF /* BusAndTrain */ = {
+			isa = PBXGroup;
+			children = (
 				25067F762549513D00986EF0 /* StopNavigationLink.swift */,
 				25067F7A2549515000986EF0 /* DetailedStopView.swift */,
 				25067F7D2549516300986EF0 /* DetailedServiceView.swift */,
 				25067F802549517800986EF0 /* StopMapView.swift */,
+				25067F862549525300986EF0 /* AddStopView.swift */,
+				25DF225B254954E3007434AF /* BusAndTrainView.swift */,
 			);
-			path = Views;
+			path = BusAndTrain;
+			sourceTree = "<group>";
+		};
+		25DF225F25495A3B007434AF /* About */ = {
+			isa = PBXGroup;
+			children = (
+				25DF226025495A42007434AF /* AboutView.swift */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +223,8 @@
 				25020CAB2546CBBC00FB2BA4 /* Persistence.swift in Sources */,
 				25067F812549517800986EF0 /* StopMapView.swift in Sources */,
 				25020CAE2546CBBC00FB2BA4 /* Wellington_Companion.xcdatamodeld in Sources */,
+				25DF226125495A42007434AF /* AboutView.swift in Sources */,
+				25DF225C254954E3007434AF /* BusAndTrainView.swift in Sources */,
 				25020CA42546CBB900FB2BA4 /* ContentView.swift in Sources */,
 				25067F6C25494B6800986EF0 /* ApiManager.swift in Sources */,
 				25067F6925494B2500986EF0 /* Models.swift in Sources */,
@@ -206,6 +233,7 @@
 				25067F7B2549515000986EF0 /* DetailedStopView.swift in Sources */,
 				25067F772549513D00986EF0 /* StopNavigationLink.swift in Sources */,
 				25067F84254951C200986EF0 /* Utils.swift in Sources */,
+				25067F872549525300986EF0 /* AddStopView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
