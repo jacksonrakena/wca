@@ -20,6 +20,7 @@ struct MetlinkStopServiceObject: Decodable {
     public var AimedArrival, AimedDeparture: String?
     public var IsRealtime: Bool?
     public var DisplayDepartureSeconds: Int?
+    public var Service: MetlinkStopServiceMetaObject
 }
 
 struct MetlinkStopServiceMetaObject: Decodable {

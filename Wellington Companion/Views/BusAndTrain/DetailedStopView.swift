@@ -15,17 +15,8 @@ struct StopDetailView: View {
         VStack {
             StopMapView(stop: stop).padding()
             
-            Text("Notices").font(.largeTitle)
-            List {
-                ForEach(stop.notices) { (notice) in
-                    NavigationLink(destination: Text(notice.notice)) {
-                        HStack {
-                            Text(notice.notice).truncationMode(.tail)
-                            Spacer()
-                            Text(notice.timeRecorded!.string(inFormat: "MMM d"))
-                        }
-                    }
-                }
+            NavigationLink(destination: NoticeView(notices: stop.notices)) {
+                Text("View " + String(stop.notices.count) + " notices")
             }
             
             Text("Upcoming services").font(.largeTitle)

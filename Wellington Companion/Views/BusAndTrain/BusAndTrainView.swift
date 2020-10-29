@@ -19,7 +19,9 @@ struct BusAndTrainView: View {
                 }
                 else {
                     List {
-                        ForEach(apiManager.stops) { (stopinfo) in
+                        ForEach(apiManager.stops.sorted(by: { i0, i1 in
+                            return i0.stopName < i1.stopName
+                        })) { (stopinfo) in
                             StopNavigationLink(stop: stopinfo)
                         }.onDelete { index in
                             let stops = try! PersistenceController.shared.container.viewContext.fetch(SavedStop.fetchRequest()) as [SavedStop]

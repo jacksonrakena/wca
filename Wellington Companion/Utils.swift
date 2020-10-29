@@ -7,6 +7,7 @@
 
 import Foundation
 import AbyssalKit
+import SwiftUI
 
 class Utils {
     static func getServiceTime(for service: StopService) -> String {

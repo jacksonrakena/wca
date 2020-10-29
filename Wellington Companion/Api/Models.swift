@@ -22,6 +22,17 @@ enum DepartureStatus {
     case delayed
     case onTime
     case unknown
+    
+    func toString() -> String {
+        switch self {
+        case .delayed:
+            return "Delayed"
+        case .onTime:
+            return "On time"
+        case .unknown:
+            return "Unknown"
+        }
+    }
 }
 
 struct StopService: Identifiable {
@@ -35,6 +46,7 @@ struct StopService: Identifiable {
     public var departureTimeSeconds: Int?
     public var departureTimeMinutes: Int?
     public var isRealTime: Bool
+    public var routeLongName: String
     
     init(raw: MetlinkStopServiceObject) {
         self.route = raw.ServiceID ?? "Unknown"
@@ -42,6 +54,7 @@ struct StopService: Identifiable {
         self.destinationStopId = raw.DestinationStopID ?? "Unknown"
         self.originStopName = raw.OriginStopName ?? "Unknown"
         self.destinationStopName = raw.DestinationStopName ?? "Unknown"
+        self.routeLongName = raw.Service.Name ?? "Unknown"
         if (raw.DepartureStatus == "delayed") {
             self.departureStatus = DepartureStatus.delayed
         } else if (raw.DepartureStatus == "onTime") {

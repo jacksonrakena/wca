@@ -21,7 +21,6 @@ struct StopNavigationLink: View {
                         
                         NextArrivalSneakView(color: .yellow, service: stop.upcomingServices[1]).frame(minWidth: 0, maxWidth: .infinity)
                         
-                        Spacer()
                     } else if stop.upcomingServices.count == 1 {
                         NextArrivalSneakView(color: .yellow, service: stop.upcomingServices[0]).frame(minWidth: 0, maxWidth: .infinity)
                     }
@@ -36,12 +35,15 @@ struct NextArrivalSneakView: View {
     var service: StopService
     
     var body: some View {
-        HStack(alignment: VerticalAlignment.center) {
-            Text(service.route)
-                .font(.system(size: 12))
-                .padding(3)
-                .background(RoundedRectangle(cornerRadius: 25).fill(color), alignment: .center)
-            Text(service.destinationStopName + " - " + Utils.getServiceTime(for: service)).font(.system(size: 14))
+        VStack(alignment: .leading, spacing: nil) {
+            HStack(alignment: VerticalAlignment.center) {
+                Text(service.route)
+                    .font(.system(size: 11))
+                    .padding(4)
+                    .background(RoundedRectangle(cornerRadius: 25).fill(color), alignment: .center)
+                Text(service.destinationStopName + " - " + Utils.getServiceTime(for: service)).font(.system(size: 13))
+                Spacer()
+            }
         }
     }
 }
