@@ -19,6 +19,7 @@ struct ServiceDetailView: View {
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 25).fill(Color.yellow), alignment: .center)
                     .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(1)
                 Text(service.destinationStopName)
                     .font(.system(size: 35)).bold().fixedSize(horizontal: false, vertical: true)
             }.padding().overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.yellow, lineWidth: 5))
@@ -46,6 +47,12 @@ struct ServiceDetailView: View {
                 VStack {
                     Text("Expected departure").bold()
                     Text(service.departureTime!.asTimeString())
+                }
+                if service.isTrainService {
+                    VStack {
+                        Text("Service type").bold()
+                        Text(service.trainServiceType ?? "Unknown")
+                    }
                 }
             }.padding(.bottom)
             if (service.hasLowFloor) {

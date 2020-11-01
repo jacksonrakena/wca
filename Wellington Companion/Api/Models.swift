@@ -47,8 +47,13 @@ struct StopService: Identifiable {
     public var departureTimeMinutes: Int?
     public var isRealTime: Bool
     public var routeLongName: String
+    public var raw: MetlinkStopServiceObject
+    
+    public var isTrainService: Bool = false
+    public var trainServiceType: String?
     
     init(raw: MetlinkStopServiceObject) {
+        self.raw = raw
         self.route = raw.ServiceID ?? "Unknown"
         self.originStopId = raw.OriginStopID ?? "Unknown"
         self.destinationStopId = raw.DestinationStopID ?? "Unknown"
@@ -73,6 +78,13 @@ struct StopService: Identifiable {
             self.departureTimeSeconds = raw.DisplayDepartureSeconds
             self.departureTimeMinutes = Int(floor(Double(self.departureTimeSeconds!)/60))
         }
+        
+        let split = self.destinationStopName.split(separator: "-")
+        if split.count > 1 && split[0].count == 4 {
+            isTrainService = true
+            self.destinationStopName = String(split[0])
+            self.trainServiceType = String(split[1])
+        }
     }
 }
 
@@ -81,23 +93,47 @@ struct StopInfo: Identifiable {
         return stopName
     }}
     public var stopName: String
+    public var stopSubtitle: String?
     public var fareZone: String
     public var stopId: String
     public var notices: [StopNotice]
     public var upcomingServices: [StopService]
     public var latitude, longitude: Double?
     
+    public var longStopName: String { get {
+        if self.stopSubtitle != nil {
+            return self.stopName + " - " + self.stopSubtitle!
+        }
+        return self.stopName
+    }}
+    
     init(raw: MetlinkStopDeparturesResponse) {
         self.stopName = raw.Stop.Name ?? "Unknown"
         self.fareZone = raw.Stop.Farezone ?? "Unknown"
         self.stopId = raw.Stop.Sms ?? "Unknown"
-        self.notices = raw.Notices.map({ (stopNotice) -> StopNotice in
-            return StopNotice(raw: stopNotice)
-        })
-        self.upcomingServices = raw.Services.map({ (service) -> StopService in
-            return StopService(raw: service)
-        })
+        if raw.Notices != nil {
+            self.notices = raw.Notices!.map({ (stopNotice) -> StopNotice in
+                return StopNotice(raw: stopNotice)
+            })
+        } else {
+            self.notices = []
+        }
+        
+        if raw.Services != nil {
+            self.upcomingServices = raw.Services!.map({ (service) -> StopService in
+                return StopService(raw: service)
+            })
+        } else {
+            self.upcomingServices = []
+        }
+        
         self.latitude = raw.Stop.Lat
         self.longitude = raw.Stop.Long
+        
+        var stopNameSplit = self.stopName.split(separator: "-")
+        if stopNameSplit.count > 1 {
+            self.stopName = stopNameSplit[0].trimmingCharacters(in: CharacterSet.whitespaces)
+            self.stopSubtitle = stopNameSplit[1].trimmingCharacters(in: CharacterSet.whitespaces)
+        }
     }
 }

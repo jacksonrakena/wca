@@ -10,8 +10,8 @@ import Foundation
 struct MetlinkStopDeparturesResponse: Decodable {
     public var LastModified: String
     public var Stop: MetlinkStopInfoObject
-    public var Notices: [MetlinkStopNoticeObject]
-    public var Services: [MetlinkStopServiceObject]
+    public var Notices: [MetlinkStopNoticeObject]?
+    public var Services: [MetlinkStopServiceObject]?
 }
 
 struct MetlinkStopServiceObject: Decodable {

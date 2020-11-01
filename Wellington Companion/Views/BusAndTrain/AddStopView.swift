@@ -15,20 +15,15 @@ struct AddStopView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         VStack {
-            
+            AllStopsMapView().padding()
+            Text("Type in a stop ID from the map above:").bold()
+            HStack {
+                TextField("", text: $id).textFieldStyle(RoundedBorderTextFieldStyle()).frame(width: 100, height: nil, alignment: .center)
+                Button("Add") {
+                    apiManager.addStop(id: id)
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }.padding()
         }.navigationBarTitle("Add a stop")
-        TextField("Stop ID", text: $id)
-        Button("Save") {
-            do {
-                var context = PersistenceController.shared.container.viewContext
-                var ent = NSEntityDescription.insertNewObject(forEntityName: "SavedStop", into: context)
-                ent.setValue(id, forKey: "stopId")
-                self.presentationMode.wrappedValue.dismiss()
-                try context.save()
-                self.apiManager.updateQuickStopView()
-            } catch {
-                print("error saving")
-            }
-        }
     }
 }

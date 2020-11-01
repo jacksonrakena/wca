@@ -10,12 +10,13 @@ import SwiftUI
 import MapKit
 
 struct StopMapView: UIViewRepresentable {
+    
     class StopMapPosition: NSObject, MKAnnotation {
         let title: String?
         let coordinate: CLLocationCoordinate2D
         
         init (stop: StopInfo) {
-            self.title = stop.stopName
+            self.title = stop.longStopName
             self.coordinate = CLLocationCoordinate2D(latitude: stop.latitude!, longitude: stop.longitude!)
         }
     }

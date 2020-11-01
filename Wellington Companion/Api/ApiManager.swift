@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 class ApiManager: ObservableObject {
     init() {
@@ -19,20 +20,36 @@ class ApiManager: ObservableObject {
     @Published var isLoadingQuickStopView = true
     @Published var quickStopLoadError = ""
     @Published var stops: [StopInfo] = []
+    @Published var erroredStops: [(String, String)] = []
+    @Published var lastUpdateTime: Date = Date()
+    
+    func addStop(id: String) {
+        do {
+            var context = PersistenceController.shared.container.viewContext
+            var ent = NSEntityDescription.insertNewObject(forEntityName: "SavedStop", into: context)
+            ent.setValue(id, forKey: "stopId")
+            try context.save()
+        } catch {
+            print("Error saving")
+        }
+        self.updateQuickStopView()
+    }
     
     func updateQuickStopView() {
         isLoadingQuickStopView = true
         quickStopLoadError = ""
         self.stops = []
+        self.erroredStops = []
         var ids = [String]()
         do {
-            var fetchedIds = try PersistenceController.shared.container.viewContext.fetch(SavedStop.fetchRequest()) as [SavedStop]
+            let fetchedIds = try PersistenceController.shared.container.viewContext.fetch(SavedStop.fetchRequest()) as [SavedStop]
             ids = fetchedIds.map { stop in
                 return stop.stopId!
             }
         } catch {
             print("Error fetching saved stops")
-            ids = ["7042", "7124", "5006", "5516", "4332", "WELL", "WAIK"]
+            ids = []
+            quickStopLoadError = "Saved stop data is corrupt. Please reinstall the app."
         }
         for id in ids {
             ApiManager.requestStopInfo(for: id) { (info, resp, err) in
@@ -40,7 +57,7 @@ class ApiManager: ObservableObject {
                     if (err != nil) {
                         print(err.debugDescription)
                         self.isLoadingQuickStopView = false
-                        self.quickStopLoadError = "There was an error fetching a stop. Try again later?"
+                        self.erroredStops.append((id, err?.localizedDescription ?? "Unknown error."))
                     } else {
                         self.isLoadingQuickStopView = false
                         self.stops.append(info!)
@@ -48,6 +65,7 @@ class ApiManager: ObservableObject {
                 }
             }
         }
+        self.lastUpdateTime = Date()
     }
     
     static func requestStopInfo(for stopId: String, callback: @escaping (StopInfo?, URLResponse?, Error?) -> Void) {

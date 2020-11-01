@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct Wellington_CompanionApp: App {
     let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

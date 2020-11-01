@@ -11,6 +11,7 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var apiManager = ApiManager()
+    let locationManager = LocationManager.shared
     
     var body: some View {
         TabView {

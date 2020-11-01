@@ -23,7 +23,11 @@
 		25067F84254951C200986EF0 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F83254951C200986EF0 /* Utils.swift */; };
 		25067F872549525300986EF0 /* AddStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25067F862549525300986EF0 /* AddStopView.swift */; };
 		25244397254A733300287358 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25244396254A733300287358 /* NoticeView.swift */; };
+		2524439B254A7D0400287358 /* AllStopsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524439A254A7D0400287358 /* AllStopsMapView.swift */; };
+		2524439E254A7ED500287358 /* stops.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2524439D254A7ED500287358 /* stops.csv */; };
+		252443A1254A81BD00287358 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252443A0254A81BD00287358 /* LocationManager.swift */; };
 		256AAE9D254932780061143B /* AbyssalKit in Frameworks */ = {isa = PBXBuildFile; productRef = 256AAE9C254932780061143B /* AbyssalKit */; };
+		256C0B73254E71CA00186F52 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 256C0B72254E71CA00186F52 /* Introspect */; };
 		25DF225C254954E3007434AF /* BusAndTrainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF225B254954E3007434AF /* BusAndTrainView.swift */; };
 		25DF226125495A42007434AF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF226025495A42007434AF /* AboutView.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +52,9 @@
 		25067F83254951C200986EF0 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		25067F862549525300986EF0 /* AddStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStopView.swift; sourceTree = "<group>"; };
 		25244396254A733300287358 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
+		2524439A254A7D0400287358 /* AllStopsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStopsMapView.swift; sourceTree = "<group>"; };
+		2524439D254A7ED500287358 /* stops.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.csv; sourceTree = "<group>"; };
+		252443A0254A81BD00287358 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		25DF225B254954E3007434AF /* BusAndTrainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusAndTrainView.swift; sourceTree = "<group>"; };
 		25DF226025495A42007434AF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				256AAE9D254932780061143B /* AbyssalKit in Frameworks */,
+				256C0B73254E71CA00186F52 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +91,7 @@
 		25020CA02546CBB900FB2BA4 /* Wellington Companion */ = {
 			isa = PBXGroup;
 			children = (
+				2524439D254A7ED500287358 /* stops.csv */,
 				25067F752549511400986EF0 /* Views */,
 				25067F6F25494C8A00986EF0 /* Wellington Companion.entitlements */,
 				25067F6325494B0300986EF0 /* Api */,
@@ -111,6 +120,7 @@
 				25067F6425494B1100986EF0 /* RawModels.swift */,
 				25067F6825494B2500986EF0 /* Models.swift */,
 				25067F6B25494B6800986EF0 /* ApiManager.swift */,
+				252443A0254A81BD00287358 /* LocationManager.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -135,6 +145,7 @@
 				25067F802549517800986EF0 /* StopMapView.swift */,
 				25067F862549525300986EF0 /* AddStopView.swift */,
 				25DF225B254954E3007434AF /* BusAndTrainView.swift */,
+				2524439A254A7D0400287358 /* AllStopsMapView.swift */,
 			);
 			path = BusAndTrain;
 			sourceTree = "<group>";
@@ -165,6 +176,7 @@
 			name = "Wellington Companion";
 			packageProductDependencies = (
 				256AAE9C254932780061143B /* AbyssalKit */,
+				256C0B72254E71CA00186F52 /* Introspect */,
 			);
 			productName = "Wellington Companion";
 			productReference = 25020C9E2546CBB900FB2BA4 /* Wellington Companion.app */;
@@ -195,6 +207,7 @@
 			mainGroup = 25020C952546CBB900FB2BA4;
 			packageReferences = (
 				256AAE9B254932780061143B /* XCRemoteSwiftPackageReference "AbyssalKit" */,
+				256C0B71254E71CA00186F52 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 25020C9F2546CBB900FB2BA4 /* Products */;
 			projectDirPath = "";
@@ -211,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25020CA92546CBBC00FB2BA4 /* Preview Assets.xcassets in Resources */,
+				2524439E254A7ED500287358 /* stops.csv in Resources */,
 				25020CA62546CBBC00FB2BA4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,9 +244,11 @@
 				25DF225C254954E3007434AF /* BusAndTrainView.swift in Sources */,
 				25020CA42546CBB900FB2BA4 /* ContentView.swift in Sources */,
 				25067F6C25494B6800986EF0 /* ApiManager.swift in Sources */,
+				252443A1254A81BD00287358 /* LocationManager.swift in Sources */,
 				25244397254A733300287358 /* NoticeView.swift in Sources */,
 				25067F6925494B2500986EF0 /* Models.swift in Sources */,
 				25020CA22546CBB900FB2BA4 /* Wellington_CompanionApp.swift in Sources */,
+				2524439B254A7D0400287358 /* AllStopsMapView.swift in Sources */,
 				25067F6525494B1100986EF0 /* RawModels.swift in Sources */,
 				25067F7B2549515000986EF0 /* DetailedStopView.swift in Sources */,
 				25067F772549513D00986EF0 /* StopNavigationLink.swift in Sources */,
@@ -442,6 +458,14 @@
 				kind = branch;
 			};
 		};
+		256C0B71254E71CA00186F52 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -449,6 +473,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 256AAE9B254932780061143B /* XCRemoteSwiftPackageReference "AbyssalKit" */;
 			productName = AbyssalKit;
+		};
+		256C0B72254E71CA00186F52 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 256C0B71254E71CA00186F52 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 
