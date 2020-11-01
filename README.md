@@ -3,4 +3,4 @@ Wellington Citizen's Assistant - train timetables, bus schedules, and other usef
 
 
 ### Alpha screenshots
-<img src="https://i.imgur.com/kp09OAq.png" alt="drawing" width="300"/>
+<img src="https://i.imgur.com/MreNfWG.jpg" alt="drawing" width="300"/>
